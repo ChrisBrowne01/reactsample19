@@ -10,6 +10,7 @@ const DynamicBotManager = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // Get input name attribute value
     setNewBot({ ...newBot, [name]: value });
   };
 
