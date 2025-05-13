@@ -7,15 +7,20 @@ const DynamicBotManager = () => {
   ]);
 
   const [newBot, setNewBot] = useState({ id: '', name: '', status: '' });
+  const [editingBot, setEditingBot] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Get input name attribute value
     setNewBot({ ...newBot, [name]: value });
   };
 
+  const handleEditInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditingBot({ ...editingBot, [name]: value });
+  };
+
   const addBotToList = () => {
-    if (newBot.id.trim() !== '' && newBot.name.trim() !== ''  && newBot.status.trim() !== '' ) {
+    if (newBot.id.trim() !== '' && newBot.name.trim() !== '' && newBot.status.trim() !== '') {
       setBotValues([...bots, newBot]);
       setNewBot({ id: '', name: '', status: '' });
     }
@@ -25,6 +30,19 @@ const DynamicBotManager = () => {
     setBotValues(bots.filter((bot) => bot.id !== id));
   };
 
+  const handleEdit = (bot) => {
+    setEditingBot(bot);
+  };
+
+  const saveEdit = () => {
+    if (editingBot.id.trim() !== '' && editingBot.name.trim() !== '' && editingBot.status.trim() !== '') {
+      setBotValues(
+        bots.map((bot) => (bot.id === editingBot.id ? editingBot : bot))
+      );
+      setEditingBot(null);
+    }
+  };
+
   return (
     <div className="dynamic-bot-manager">
       <ul>
@@ -32,33 +50,66 @@ const DynamicBotManager = () => {
           <li key={bot.id}>
             <span>
               {bot.id} - {bot.name} - {bot.status}{' '}
+              <button onClick={() => handleEdit(bot)}>Edit</button>
               <button onClick={() => handleDelete(bot.id)}>Delete Bot</button>
             </span>
           </li>
         ))}
       </ul>
-      <input
-        type="text"
-        name="id"
-        value={newBot.id}
-        onChange={handleInputChange}
-        placeholder="Type Bot ID"
-      />
-      <input
-        type="text"
-        name="name"
-        value={newBot.name}
-        onChange={handleInputChange}
-        placeholder="Type Bot Name"
-      />
-      <input
-        type="text"
-        name="status"
-        value={newBot.status}
-        onChange={handleInputChange}
-        placeholder="Type Bot Status"
-      />
-      <button onClick={addBotToList}>Add new Bot</button>
+      {editingBot ? (
+        <div>
+          <h3>Edit Bot</h3>
+          <input
+            type="text"
+            name="id"
+            value={editingBot.id}
+            onChange={handleEditInputChange}
+            placeholder="Edit Bot ID"
+            disabled
+          />
+          <input
+            type="text"
+            name="name"
+            value={editingBot.name}
+            onChange={handleEditInputChange}
+            placeholder="Edit Bot Name"
+          />
+          <input
+            type="text"
+            name="status"
+            value={editingBot.status}
+            onChange={handleEditInputChange}
+            placeholder="Edit Bot Status"
+          />
+          <button onClick={saveEdit}>Save Changes</button>
+        </div>
+      ) : (
+        <div>
+          <h3>Add New Bot</h3>
+          <input
+            type="text"
+            name="id"
+            value={newBot.id}
+            onChange={handleInputChange}
+            placeholder="Type Bot ID"
+          />
+          <input
+            type="text"
+            name="name"
+            value={newBot.name}
+            onChange={handleInputChange}
+            placeholder="Type Bot Name"
+          />
+          <input
+            type="text"
+            name="status"
+            value={newBot.status}
+            onChange={handleInputChange}
+            placeholder="Type Bot Status"
+          />
+          <button onClick={addBotToList}>Add new Bot</button>
+        </div>
+      )}
     </div>
   );
 };
