@@ -13,7 +13,12 @@ const DynamicBotManager = () => {
 
   return (
     <div>
-      
+      <ul>
+        {
+          bots.map(bot=> <li><span>{bot.id} - {bot.name} - {bot.status}</span></li>)
+        }
+      </ul>      
+        
     </div>
   )
 }
