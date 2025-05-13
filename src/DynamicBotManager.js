@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './DynamicBotManager.css';
 
 const DynamicBotManager = () => {
   const [bots, setBotValues] = useState([
@@ -70,7 +71,7 @@ const DynamicBotManager = () => {
             <span>
               {bot.id} - {bot.name} - {bot.status}{' '}
               <button onClick={() => handleEdit(bot)}>Edit</button>
-              <button onClick={() => handleDelete(bot.id)}>Delete Bot</button>
+              <button className='delete' onClick={() => handleDelete(bot.id)}>Delete Bot</button>
             </span>
           </li>
         ))}
@@ -126,7 +127,7 @@ const DynamicBotManager = () => {
             onChange={handleInputChange}
             placeholder="Type Bot Status"
           />
-          <button onClick={addBotToList}>Add new Bot</button>
+          <button className='add' onClick={addBotToList}>Add new Bot</button>
         </div>
       )}
     </div>

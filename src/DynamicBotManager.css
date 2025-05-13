@@ -1,0 +1,104 @@
+/* BotListManager.css */
+
+.dynamic-bot-manager {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-family: Arial, sans-serif;
+}
+
+.dynamic-bot-manager h1 {
+  color: #2c3e50;
+  text-align: center;
+}
+
+
+.dynamic-bot-manager h1 + div {
+  display: flex;
+  align-items: center;
+  margin: 10px 15px;
+}
+
+.dynamic-bot-manager ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style for each list item */
+.dynamic-bot-manager ul li {
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Add slight shadow for each item */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Vertically center content */
+  justify-content: space-between; /* Space out text and button */
+  border: 1px solid #ddd;
+}
+
+.dynamic-bot-manager ul li span {
+  margin-right: 10px; /* Adds space between bot details and button */
+  flex-grow: 1; /* Allow the text to take up available space */
+  display: flex; /* Use flexbox inside the span to control the layout of the bot details */
+  align-items: center;
+  gap: 10px;
+}
+
+
+.dynamic-bot-manager button {
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.dynamic-bot-manager ul ~ form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+} 
+
+.dynamic-bot-manager input, 
+.dynamic-bot-manager div form select {
+  padding: 10px 30px;
+  margin-inline: 5px;
+  background-color: #e9e9e9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.dynamic-bot-manager button {
+  background-color: #007fd3;
+}
+
+.dynamic-bot-manager ul li button {
+  background-color: #4CAF50;
+}
+
+.dynamic-bot-manager ul li button:hover {
+  background-color: #45a049
+}
+
+.dynamic-bot-manager ul li button:active {
+  background-color: #367c39;
+}
+
+.dynamic-bot-manager ul li button.delete {
+  background-color: #e20000;
+}
+
+.dynamic-bot-manager ul li button.delete:hover {
+  background-color: #cb1515
+}
+
+.dynamic-bot-manager ul li button.delete:active {
+  background-color: #ab0303;
+}
