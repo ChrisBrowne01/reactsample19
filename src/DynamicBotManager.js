@@ -8,11 +8,16 @@ const DynamicBotManager = () => {
 
   const [newBot, setNewBot] = useState({ id: '', name: '', status: '' });
   const [editingBot, setEditingBot] = useState(null);
+  const [statusType, setStatusValue] = useState("all");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewBot({ ...newBot, [name]: value });
   };
+
+  const filterByStatus = (statusValue) => {
+    return bots.filter(bot => bot.status === statusValue);
+  }
 
   const handleEditInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,10 +48,24 @@ const DynamicBotManager = () => {
     }
   };
 
+  const handleFilter = (event) => {
+    setStatusValue(event.target.value);
+  }
+  const filteredBots = statusType !== "all" ? filterByStatus(statusType) : bots;
+
   return (
     <div className="dynamic-bot-manager">
+      <div>Filter by: {' '}
+        <form>
+          <select value={statusType} onChange={handleFilter}>
+            <option value="all">All</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </form>
+      </div>
       <ul>
-        {bots.map((bot) => (
+        {filteredBots.map((bot) => (
           <li key={bot.id}>
             <span>
               {bot.id} - {bot.name} - {bot.status}{' '}
