@@ -14,7 +14,7 @@ const DynamicBotManager = () => {
   };
 
   const addBotToList = () => {
-    if (newBot.id.trim() && newBot.name.trim() && newBot.status.trim()) {
+    if (newBot.id.trim() !== '' && newBot.name.trim() !== ''  && newBot.status.trim() !== '' ) {
       setBotValues([...bots, newBot]);
       setNewBot({ id: '', name: '', status: '' });
     }
