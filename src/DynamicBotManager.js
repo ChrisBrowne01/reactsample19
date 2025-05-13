@@ -1,45 +1,65 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react';
 
 const DynamicBotManager = () => {
-  //  useState hook for list of bots
   const [bots, setBotValues] = useState([
     { id: '1', name: 'Email Bot', status: 'Active' },
     { id: '2', name: 'Data Bot', status: 'Inactive' }
   ]);
 
-  // useState hook for new bot object
-  const [newBot, setNewBot] = useState({id: '', name: '', status: ''});
+  const [newBot, setNewBot] = useState({ id: '', name: '', status: '' });
 
-  // Implement input change handler
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewBot({ ...newBot, [name]: value });
+  };
 
-
-  // Implement add bot functionality
   const addBotToList = () => {
-    if (newBot.id.trim() !== '' && newBot.name.trim() !== '' && newBot.status.trim() !== '') {
+    if (newBot.id.trim() && newBot.name.trim() && newBot.status.trim()) {
       setBotValues([...bots, newBot]);
-      setNewBot({id: '', name: '', status: ''});
+      setNewBot({ id: '', name: '', status: '' });
     }
-  }
+  };
 
-  // Implement delete bot functionality
-  function handleDelete(id) {
-    setBotValues(bots.filter(bot=> id !== bot.id));
-  }
+  const handleDelete = (id) => {
+    setBotValues(bots.filter((bot) => bot.id !== id));
+  };
 
   return (
-    <div>
+    <div className="dynamic-bot-manager">
       <ul>
-        {
-          bots.map(bot=> <li><span>{bot.id} - {bot.name} - {bot.status} <button onClick={() => handleDelete(bot.id)}>Delete Bot</button></span></li>)
-        }
-      </ul>      
-      <input type="text" value={newBot.id} onChange={(e)=> setNewBot({...newBot, id: e.target.value})} placeholder="Type Bot ID" />        
-      <input type="text" value={newBot.name} onChange={(e)=> setNewBot({...newBot, name: e.target.value})} placeholder="Type Bot Name" />        
-      <input type="text" value={newBot.status} onChange={(e)=> setNewBot({...newBot, status: e.target.value})} placeholder="Type Bot Status" />
-      <button onClick={addBotToList}>Add new Bot</button>        
+        {bots.map((bot) => (
+          <li key={bot.id}>
+            <span>
+              {bot.id} - {bot.name} - {bot.status}{' '}
+              <button onClick={() => handleDelete(bot.id)}>Delete Bot</button>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        name="id"
+        value={newBot.id}
+        onChange={handleInputChange}
+        placeholder="Type Bot ID"
+      />
+      <input
+        type="text"
+        name="name"
+        value={newBot.name}
+        onChange={handleInputChange}
+        placeholder="Type Bot Name"
+      />
+      <input
+        type="text"
+        name="status"
+        value={newBot.status}
+        onChange={handleInputChange}
+        placeholder="Type Bot Status"
+      />
+      <button onClick={addBotToList}>Add new Bot</button>
     </div>
-  )
-}
+  );
+};
 
-export default DynamicBotManager
+export default DynamicBotManager;
