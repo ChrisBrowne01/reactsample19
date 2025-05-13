@@ -23,12 +23,15 @@ const DynamicBotManager = () => {
   }
 
   // Implement delete bot functionality
+  function handleDelete(id) {
+    setBotValues(bots.filter(bot=> id !== bot.id));
+  }
 
   return (
     <div>
       <ul>
         {
-          bots.map(bot=> <li><span>{bot.id} - {bot.name} - {bot.status}</span></li>)
+          bots.map(bot=> <li><span>{bot.id} - {bot.name} - {bot.status} <button onClick={() => handleDelete(bot.id)}>Delete Bot</button></span></li>)
         }
       </ul>      
       <input type="text" value={newBot.id} onChange={(e)=> setNewBot({...newBot, id: e.target.value})} placeholder="Type Bot ID" />        
